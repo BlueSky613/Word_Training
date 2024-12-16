@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: "Noto Sans JP", sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            z-index: 11;
+        }
+
+        .first-screen {
+            background-color: #f4f4f4;
+            width: 300px;
+            height: 600px;
+            transition: 0.3s;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .select-item {
+            background-color: white;
+            width: 250px;
+            height: 50px;
+            margin-top: 20px;
+            border-width: 1px;
+            border-radius: 10px;
+            border-color: lightgray;
+            border-style: solid;
+            transition: 0.3s;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+        }
+
+        .content-item {
+            background-color: white;
+            width: 280px;
+            margin-top: 20px;
+            border-radius: 10px;
+            transition: 0.3s;
+            padding: 10px;
+            box-shadow: inset;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .content-text {
+            color: black;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0px;
+            text-align: start;
+            cursor: pointer;
+        }
+
+        .switch-button {
+            color: black;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0px;
+            text-decoration-line: underline;
+            text-align: center;
+        }
+
+        .button {
+            display: flex;
+            background-color: #fcd24f;
+            width: 140px;
+            height: 40px;
+            border-radius: 20px;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            border-color: #1f1347;
+            border-width: 2px;
+            border-style: solid;
+            cursor: pointer;
+        }
+    </style>
+    <title>Flash Card</title>
+</head>
+<script>
+    var grade = 5;
+
+    var titleArray = [
+        "1. I like to",
+        "2. I wanna",
+        "3. I wanted to",
+        "4. I want you to",
+        "5. I wanted you to",
+        "6. I don't wanna",
+        "7. I don't want you to",
+        "8. You wanna",
+        "9. I'd like",
+        "10. I'd like to",
+        "11. Would you like",
+        "12. Would you like to",
+        "13. I need",
+        "14. I gotta",
+        "15. I'm gonna have to",
+        "16. You don't have to",
+        "17. I have",
+        "18. I don't have",
+        "19. Do you have",
+        "20. You know",
+        "21. You can",
+        "22. I can't/You can't",
+        "23. Can you/Could you",
+        "24. Could you tell me",
+        "25. Can I/Could I",
+        "26. Should I",
+        "27. Maybe I'll",
+        "28. Then I'll",
+        "29. Did you know",
+        "30. Maybe you should",
+        "31. Maybe you shouldn't",
+        "32. You might wanna"
+    ];
+</script>
+
+<body>
+    <div class="first-screen" style="display: block;" id="first_page">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="color: #05a5a9; font-size: 36px; font-weight: 700; margin: 0px;margin-left: 10px;" id="grade2">
+                Masa検5級
+            </p>
+        </div>
+        <div style="display: flex; align-items: center; flex-direction: column;" id="main_page">
+        </div>
+    </div>
+    <div class="first-screen" style="display: none;" id="second_page">
+        <div style="display: flex; justify-content: space-between; align-items: center; background-color: #f37e30;border-radius: 12px;"
+            onclick="goFirstPage()">
+            <img src="img/left.png" class="icon">
+            <p style="color: white; font-size: 20px; font-weight: 700; margin: 10px;">
+                暗唱トレーニング教材</p>
+            <img src="img/right.png" class="icon">
+        </div>
+        <p style="color: #f37e30; font-size: 20px; font-weight: 700; margin: 0px;margin-left: 10px; margin-top: 30px;"
+            id="page_order">1. I like to</p>
+        <div style="display: block;" id="english_content">
+            <div class="content-item">
+                <div
+                    style="display: flex; justify-content: start; align-items: start; margin-top: 0px; flex-direction: column;">
+                    <div style="display: flex; justify-content: start;">
+                        <p class="content-text">
+                            ①</p>
+                        <p class="content-text" id="english_content1" onclick="audioPlay(1)">
+                            I like to study English.</p>
+                    </div>
+                    <div style="display: flex; justify-content: start;">
+                        <p class="content-text">
+                            ②</p>
+                        <p class="content-text" id="english_content2" onclick="audioPlay(2)">
+                            I like to read books.</p>
+                    </div>
+                    <div style="display: flex; justify-content: start;">
+                        <p class="content-text">
+                            ③</p>
+                        <p class="content-text" id="english_content3" onclick="audioPlay(3)">
+                            I like to watch sports</p>
+                    </div>
+                    <div style="display: flex; justify-content: start;">
+                        <p class="content-text">
+                            ④</p>
+                        <p class="content-text" id="english_content4" onclick="audioPlay(4)">
+                            I like to go for a walk.</p>
+                    </div>
+                    <div style="display: flex; justify-content: start;">
+                        <p class="content-text">
+                            ⑤</p>
+                        <p class="content-text" id="english_content5" onclick="audioPlay(5)">
+                            I like to play the game.</p>
+                    </div>
+                    <div style="display: flex; justify-content: start;">
+                        <p class="content-text">
+                            ⑥</p>
+                        <p class="content-text" id="english_content6" onclick="audioPlay(6)">
+                            I like to see movies.</p>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: end; margin-top: 20px;cursor: pointer;"
+                    onclick="goJapaneseContent()">
+                    <p class="switch-button">
+                        日本語を見る</p>
+                </div>
+            </div>
+        </div>
+        <div style="display: none;" id="middle_content">
+            <div class="content-item" style="height: 200px; align-items: center; display: flex;">
+                <p style="color: black; font-size: 20px; font-weight: 600; margin: 0px; text-align: center;">
+                    覚えた例文をできるだけ多くアウトプットしてみよう！</p>
+            </div>
+        </div>
+        <div style="display: none;" id="japanese_content">
+            <div class="content-item">
+                <div
+                    style="display: flex; justify-content: start; align-items: start; margin-top: 0px; flex-direction: column;">
+                    <div style="display: flex; justify-content: start;">
+                        <p class="content-text">
+                            ①</p>
+                        <p class="content-text" id="japanese_content1">
+                            英語を勉強するのが好き</p>
+                    </div>
+                    <div style="display: flex; justify-content: start;">
+                        <p class="content-text">
+                            ②</p>
+                        <p class="content-text" id="japanese_content2">
+                            英語を勉強するのが好き</p>
+                    </div>
+                    <div style="display: flex; justify-content: start;">
+                        <p class="content-text">
+                            ③</p>
+                        <p class="content-text" id="japanese_content3">
+                            英語を勉強するのが好き</p>
+                    </div>
+                    <div style="display: flex; justify-content: start;">
+                        <p class="content-text">
+                            ④</p>
+                        <p class="content-text" id="japanese_content4">
+                            英語を勉強するのが好き</p>
+                    </div>
+                    <div style="display: flex; justify-content: start;">
+                        <p class="content-text">
+                            ⑤</p>
+                        <p class="content-text" id="japanese_content5">
+                            英語を勉強するのが好き</p>
+                    </div>
+                    <div style="display: flex; justify-content: start;">
+                        <p class="content-text">
+                            ⑥</p>
+                        <p class="content-text" id="japanese_content6">
+                            英語を勉強するのが好き</p>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: end; margin-top: 20px; cursor: pointer;"
+                    onclick="goEnglishContent()">
+                    <p class="switch-button">
+                        英語を見る</p>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex; margin-top: 10px; padding: 10px; justify-content: space-between;">
+            <p style="margin: 0px; color: transparent;" id="counter">30</p>
+            <div class="button" onclick="clickButton()">
+                <p style="margin: 0px; font-weight: 700;" id="button-text">START</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+
+
+
+    //Grade 5
+    const japaneseContentLike5 = {
+        "1/6": "英語を勉強するのが好き。",
+        "2/6": "本を読むのが好き。",
+        "3/6": "スポーツ観戦するのが好き。",
+        "4/6": "散歩するのが好き。",
+        "5/6": "ゲームをするのが好き。",
+        "6/6": "映画を見るのが好き。"
+    };
+
+    const englishContentLike5 = {
+        "1/6": "I like to study English.",
+        "2/6": "I like to read books.",
+        "3/6": "I like to watch sports.",
+        "4/6": "I like to go for a walk.",
+        "5/6": "I like to play the game.",
+        "6/6": "I like to see movies."
+    };
+
+    const japaneseContentWanna5 = {
+        "1/6": "英語を勉強したい。",
+        "2/6": "世界中を旅したい。",
+        "3/6": "君のお母さんに会ってみたい。",
+        "4/6": "なにか甘いのが食べたい。",
+        "5/6": "ショッピングに行きたい。",
+        "6/6": "英語を話せるようになりたい。"
+    };
+
+    const englishContentWanna5 = {
+        "1/6": "I wanna study English.",
+        "2/6": "I wanna travel around the world.",
+        "3/6": "I wanna meet your mother.",
+        "4/6": "I wanna eat something sweet.",
+        "5/6": "I wanna go shopping.",
+        "6/6": "I wanna be able to speak English."
+    };
+
+    const japaneseContentWantedTo5 = {
+        "1/6": "早く家に帰りたかった。",
+        "2/6": "もっと寝たかった。",
+        "3/6": "行きたかった。",
+        "4/6": "君の作ったプリン食べたかったー。",
+        "5/6": "その映画見たかったー。",
+        "6/6": "そのレストラン行ってみたかった。"
+    };
+
+    const englishContentWantedTo5 = {
+        "1/6": "I wanted to go home earlier.",
+        "2/6": "I wanted to sleep more.",
+        "3/6": "I wanted to go.",
+        "4/6": "I wanted to eat the pudding you made.",
+        "5/6": "I wanted to see the movie.",
+        "6/6": "I wanted to try the restaurant."
+    };
+
+    const japaneseContentWantNounTo5 = {
+        "1/6": "君に来てほしい。",
+        "2/6": "お皿洗ってほしい。",
+        "3/6": "早く家に帰ってきてほしい。",
+        "4/6": "一緒に来てほしい。",
+        "5/6": "謝ってほしい。",
+        "6/6": "お金返してほしい。"
+    };
+
+    const englishContentWantNounTo5 = {
+        "1/6": "I want you to come.",
+        "2/6": "I want you to wash the dishes.",
+        "3/6": "I want you to come back home early.",
+        "4/6": "I want you to come with me.",
+        "5/6": "I want you to apologize.",
+        "6/6": "I want you to give the money back."
+    };
+
+    const japaneseContentWantedNounTo5 = {
+        "1/6": "本当のこと言ってほしかった。",
+        "2/6": "もっと早く言ってほしかった。",
+        "3/6": "誘ってほしかった。",
+        "4/6": "待っててほしかった。",
+        "5/6": "秘密守っておいてほしかった。",
+        "6/6": "時間通りに来てほしかった。"
+    };
+
+    const englishContentWantedNounTo5 = {
+        "1/6": "I wanted you to tell me the truth.",
+        "2/6": "I wanted you to tell me earlier.",
+        "3/6": "I wanted you to invite me.",
+        "4/6": "I wanted you to wait for me.",
+        "5/6": "I wanted you to keep the secret.",
+        "6/6": "I wanted you to be on time."
+    };
+
+    const japaneseContentDontWanna5 = {
+        "1/6": "あきらめたくない。",
+        "2/6": "料理したくない。",
+        "3/6": "TOEICのために勉強したくない。",
+        "4/6": "そこに行きたくない。",
+        "5/6": "仕事に行きたくない。",
+        "6/6": "彼女と喧嘩したくない。"
+    };
+
+    const englishContentDontWanna5 = {
+        "1/6": "I don’t wanna give up.",
+        "2/6": "I don’t wanna cook.",
+        "3/6": "I don’t wanna study for the TOEIC test.",
+        "4/6": "I don’t wanna go there.",
+        "5/6": "I don’t wanna go to work.",
+        "6/6": "I don’t wanna fight with her."
+    };
+
+    const japaneseContentDontWantYouTo5 = {
+        "1/6": "無理しないでほしい。",
+        "2/6": "ドタキャンしないでほしい。",
+        "3/6": "今のままでいてほしい。",
+        "4/6": "諦めないでほしい。",
+        "5/6": "汚い言葉使わないでほしい。",
+        "6/6": "行ってほしくない。"
+    };
+
+    const englishContentDontWantYouTo5 = {
+        "1/6": "I don’t want you to push yourself too hard.",
+        "2/6": "I don’t want you to cancel on me.",
+        "3/6": "I don’t want you to change.",
+        "4/6": "I don’t want you to give up.",
+        "5/6": "I don’t want you to use violent language.",
+        "6/6": "I don’t want you to go."
+    };
+
+    const japaneseContentYouWanna5 = {
+        "1/6": "君も来る？",
+        "2/6": "僕の充電器使う？",
+        "3/6": "今週の月曜日遊ぶ？",
+        "4/6": "ちょっと飲む？",
+        "5/6": "僕のペン使う？",
+        "6/6": "僕の家来る？"
+    };
+
+    const englishContentYouWanna5 = {
+        "1/6": "You wanna come?",
+        "2/6": "You wanna use my charger?",
+        "3/6": "You wanna hang out this Monday?",
+        "4/6": "You wanna drink some?",
+        "5/6": "You wanna use my pen?",
+        "6/6": "You wanna come over?"
+    };
+
+    const japaneseContentIdLike5 = {
+        "1/6": "これいただきたいです。",
+        "2/6": "お水が欲しいです。",
+        "3/6": "お茶頂きたいです。",
+        "4/6": "コーヒーを一杯お願いします。",
+        "5/6": "チケットを二枚ください。",
+        "6/6": "レシートをください。"
+    };
+
+    const englishContentIdLike5 = {
+        "1/6": "I’d like this one.",
+        "2/6": "I’d like some water.",
+        "3/6": "I’d like some tea.",
+        "4/6": "I’d like a cup of coffee.",
+        "5/6": "I’d like two tickets.",
+        "6/6": "I’d like a receipt."
+    };
+
+    const japaneseContentIdLikeTo5 = {
+        "1/6": "Masaさんとお話しがしたいのですが。",
+        "2/6": "予約を取りたいのですが。",
+        "3/6": "診察を受けたいのですが。",
+        "4/6": "それの詳細を知りたいのですが。",
+        "5/6": "これを返品したいのですが。",
+        "6/6": "質問をしたいのですが。"
+    };
+
+    const englishContentIdLikeTo5 = {
+        "1/6": "I’d like to talk to Mr. Masa.",
+        "2/6": "I’d like to make a reservation.",
+        "3/6": "I’d like to see a doctor.",
+        "4/6": "I’d like to know more details about it.",
+        "5/6": "I’d like to return it.",
+        "6/6": "I’d like to ask you a question."
+    };
+
+    const japaneseContentWouldYouLike5 = {
+        "1/6": "お水いる？",
+        "2/6": "コーヒー飲む？",
+        "3/6": "アイス食べる？",
+        "4/6": "おかわりしたい？",
+        "5/6": "なんか食べたい？",
+        "6/6": "なんか飲みたい？"
+    };
+
+    const englishContentWouldYouLike5 = {
+        "1/6": "Would you like some water?",
+        "2/6": "Would you like some coffee?",
+        "3/6": "Would you like some ice cream?",
+        "4/6": "Would you like some more?",
+        "5/6": "Would you like something to eat?",
+        "6/6": "Would you like something to drink?"
+    };
+
+    const japaneseContentWouldYouLikeTo5 = {
+        "1/6": "一緒に来ません？",
+        "2/6": "飲み会行きません？",
+        "3/6": "一緒にお昼ご飯食べません？",
+        "4/6": "もっと知りたいですか？",
+        "5/6": "ゲームしません？",
+        "6/6": "散歩しません？"
+    };
+
+    const englishContentWouldYouLikeTo5 = {
+        "1/6": "Would you like to come with me?",
+        "2/6": "Would you like to go for a drink?",
+        "3/6": "Would you like to have lunch with me?",
+        "4/6": "Would you like to know more?",
+        "5/6": "Would you like to play a game?",
+        "6/6": "Would you like to go for a walk?"
+    };
+
+    const japaneseContentINeed5 = {
+        "1/6": "君が必要なんだ。",
+        "2/6": "睡眠が必要、、",
+        "3/6": "お水が欲しい、、",
+        "4/6": "助けが必要なんだ、、",
+        "5/6": "休まないともうだめ、、",
+        "6/6": "コーラ飲まないともうだめ、、"
+    };
+
+    const englishContentINeed5 = {
+        "1/6": "I need you.",
+        "2/6": "I need some sleep.",
+        "3/6": "I need some water.",
+        "4/6": "I need help.",
+        "5/6": "I need some rest.",
+        "6/6": "I need coke."
+    };
+
+    const japaneseContentIGotta5 = {
+        "1/6": "もう行かないと。",
+        "2/6": "急がないと。",
+        "3/6": "急がなきゃだめだよ。",
+        "4/6": "宿題をやらなきゃ。",
+        "5/6": "10分後に出発しないといけない。",
+        "6/6": "仕事に行かなきゃ。"
+    };
+
+    const englishContentIGotta5 = {
+        "1/6": "I gotta go.",
+        "2/6": "I gotta run.",
+        "3/6": "You gotta rush.",
+        "4/6": "I gotta do my homework.",
+        "5/6": "I gotta leave in 10 minutes.",
+        "6/6": "I gotta go to work."
+    };
+
+    const japaneseContentImGonnaHaveTo5 = {
+        "1/6": "徹夜するしかないな。",
+        "2/6": "彼に本当のこと言うしかないな。",
+        "3/6": "予約キャンセルしないと…",
+        "4/6": "ホテルに泊まるしかないな。",
+        "5/6": "もう一個買うしかないな。",
+        "6/6": "もっと勉強しないとな。"
+    };
+
+    const englishContentImGonnaHaveTo5 = {
+        "1/6": "I’m gonna have to pull an all-nighter.",
+        "2/6": "I’m gonna have to tell him the truth.",
+        "3/6": "I’m gonna have to cancel the reservation.",
+        "4/6": "I’m gonna have to stay at a hotel.",
+        "5/6": "I’m gonna have to buy another one.",
+        "6/6": "I’m gonna have to study harder."
+    };
+
+    const japaneseContentYouDontHaveTo5 = {
+        "1/6": "ごめんって思わなくていいよ。",
+        "2/6": "来なくてもいいよ。",
+        "3/6": "急がなくていいよ。",
+        "4/6": "心配しなくていいよ。",
+        "5/6": "返信はしなくていいよ。",
+        "6/6": "なんも買わなくていいよ。"
+    };
+
+    const englishContentYouDontHaveTo5 = {
+        "1/6": "You don’t have to be sorry.",
+        "2/6": "You don’t have to come.",
+        "3/6": "You don’t have to hurry.",
+        "4/6": "You don’t have to worry.",
+        "5/6": "You don’t have to message me back.",
+        "6/6": "You don’t have to buy me anything."
+    };
+
+    const japaneseContentIHave5 = {
+        "1/6": "頭痛がする。",
+        "2/6": "ひどい咳が出る。",
+        "3/6": "あんまりよくないニュースがあって、、",
+        "4/6": "ちょっと言いたいことがあって、、",
+        "5/6": "すごく楽しかったよ。",
+        "6/6": "事故に巻き込まれちゃって、、"
+    };
+
+    const englishContentIHave5 = {
+        "1/6": "I have a headache.",
+        "2/6": "I have a bad cough.",
+        "3/6": "I have bad news.",
+        "4/6": "I have something to say.",
+        "5/6": "I had a great time.",
+        "6/6": "I had an accident."
+    };
+
+    const japaneseContentIDontHave5 = {
+        "1/6": "パソコン持ってないんだ。",
+        "2/6": "水筒持ってないんだ。",
+        "3/6": "運転免許持ってないんだ。",
+        "4/6": "君のLINE知らない。",
+        "5/6": "今日は宿題ないんだ。",
+        "6/6": "なんも文句ないよ。"
+    };
+
+    const englishContentIDontHave5 = {
+        "1/6": "I don’t have a computer.",
+        "2/6": "I don’t have a water bottle.",
+        "3/6": "I don’t have a car license.",
+        "4/6": "I don’t have your LINE address.",
+        "5/6": "I don’t have homework today.",
+        "6/6": "I don’t have any complaints."
+    };
+
+    const japaneseContentDoYouHave5 = {
+        "1/6": "なんか書くもの持ってる？",
+        "2/6": "兄弟はいるの？",
+        "3/6": "身分証明書持ってますか？",
+        "4/6": "もっと小さいものはありますか？",
+        "5/6": "もっと安いのありますか？",
+        "6/6": "彼の電話番号知ってる？"
+    };
+
+    const englishContentDoYouHave5 = {
+        "1/6": "Do you have anything to write with?",
+        "2/6": "Do you have any siblings?",
+        "3/6": "Do you have ID?",
+        "4/6": "Do you have a smaller one?",
+        "5/6": "Do you have a less expensive one?",
+        "6/6": "Do you have his phone number?"
+    };
+
+    const japaneseContentYouKnow5 = {
+        "1/6": "どうやって駅に行くのか分かる？",
+        "2/6": "どこに彼が行ったか知ってる？",
+        "3/6": "彼女の誕生日いつか知ってる？",
+        "4/6": "これの使い方分かる？",
+        "5/6": "Masaが誰か知ってる？",
+        "6/6": "ATMどこにあるか分かる？"
+    };
+
+    const englishContentYouKnow5 = {
+        "1/6": "You know how to get to the station?",
+        "2/6": "You know where he went to?",
+        "3/6": "You know when her birthday is?",
+        "4/6": "You know how to use this?",
+        "5/6": "You know who Masa is?",
+        "6/6": "You know where the ATM is?"
+    };
+
+    const japaneseContentYoucan5 = {
+        "1/6": "君ならできるよ。",
+        "2/6": "君なら彼に勝てるよ。",
+        "3/6": "君なら試験に受かるよ。",
+        "4/6": "それ食べていいよ。",
+        "5/6": "Masaって呼んでいいよ。",
+        "6/6": "それもらっていいよ。"
+    };
+
+    const englishContentYoucan5 = {
+        "1/6": "You can do it.",
+        "2/6": "You can beat him.",
+        "3/6": "You can pass the test.",
+        "4/6": "You can have it.",
+        "5/6": "You can call me Masa.",
+        "6/6": "You can keep it."
+    };
+
+    const japaneseContentICantYouCant5 = {
+        "1/6": "受け取れないよ。",
+        "2/6": "そんなお金払えないよ！",
+        "3/6": "彼を叱るなんてできないよ！",
+        "4/6": "そんな口の利き方しちゃだめ！",
+        "5/6": "宿題終わらせるまでゲームしちゃだめ！",
+        "6/6": "彼の悪口言っちゃダメ！"
+    };
+
+    const englishContentICantYouCant5 = {
+        "1/6": "I can’t take it.",
+        "2/6": "I can’t pay the money.",
+        "3/6": "I can’t scold him.",
+        "4/6": "You can’t talk to me like that.",
+        "5/6": "You can’t play the game until you finish your homework.",
+        "6/6": "You can’t say bad things about him."
+    };
+
+    const japaneseContentCanYouCouldYou5 = {
+        "1/6": "ドア開けてくれる？",
+        "2/6": "迎えに来てくれる？",
+        "3/6": "手伝ってくれる？",
+        "4/6": "車で駅まで送っていってくれない？",
+        "5/6": "塩取ってくれませんか？",
+        "6/6": "もう少し声を大きくしてくれませんか？"
+    };
+
+    const englishContentCanYouCouldYou5 = {
+        "1/6": "Can you open the door?",
+        "2/6": "Can you pick me up?",
+        "3/6": "Can you give me a hand?",
+        "4/6": "Could you drive me to the station?",
+        "5/6": "Could you pass me the salt?",
+        "6/6": "Could you speak up a little bit?"
+    };
+
+    const japaneseContentCouldYouTellMe5 = {
+        "1/6": "彼の名前教えていただけますか？",
+        "2/6": "答えを教えていただけますか？",
+        "3/6": "時間教えていただけますか？",
+        "4/6": "これどうやって使うか教えていただけますか？",
+        "5/6": "その駅までの道教えていただけますか？",
+        "6/6": "次の電車いつ来るか教えていただけますか？"
+    };
+
+    const englishContentCouldYouTellMe5 = {
+        "1/6": "Could you tell me his name?",
+        "2/6": "Could you tell me the answer?",
+        "3/6": "Could you tell me the time?",
+        "4/6": "Could you tell me how to use this?",
+        "5/6": "Could you tell me how to get to the station?",
+        "6/6": "Could you tell me when the next train will come?"
+    };
+
+    const japaneseContentCanICouldI5 = {
+        "1/6": "君のペン借りてもいい？",
+        "2/6": "トイレ使ってもいい？",
+        "3/6": "ちょっと聞いてもいい？",
+        "4/6": "今日は早く帰ってもいいですか？",
+        "5/6": "明日お休みとってもいいですか？",
+        "6/6": "後でかけなおしてもいいですか？"
+    };
+
+    const englishContentCanICouldI5 = {
+        "1/6": "Can I borrow your pen?",
+        "2/6": "Can I use the restroom?",
+        "3/6": "Can I ask you something?",
+        "4/6": "Could I leave early today?",
+        "5/6": "Could I take a day off tomorrow?",
+        "6/6": "Could I call you later?"
+    };
+
+    const japaneseContentShouldI5 = {
+        "1/6": "オンライン英会話始めた方がいいですか？",
+        "2/6": "僕も行った方がいい？",
+        "3/6": "服着替えた方がいいかな？",
+        "4/6": "もう少し声大きくした方がいい？",
+        "5/6": "もう少し塩入れた方がいいかな？",
+        "6/6": "後で電話かけなおした方がいい？"
+    };
+
+    const englishContentShouldI5 = {
+        "1/6": "Should I start taking online English conversation lessons?",
+        "2/6": "Should I go, too?",
+        "3/6": "Should I change clothes?",
+        "4/6": "Should I speak up a little bit?",
+        "5/6": "Should I add more salt?",
+        "6/6": "Should I call you later?"
+    };
+
+    const japaneseContentMaybeIll5 = {
+        "1/6": "僕もそれ見てみようかな。",
+        "2/6": "僕もそれ食べてみようかな。",
+        "3/6": "彼と話してみようかな。",
+        "4/6": "途中でなんか買ってこようかな。",
+        "5/6": "明日髪切ろうっかな。",
+        "6/6": "今夜は寿司を食べようかな。"
+    };
+
+    const englishContentMaybeIll5 = {
+        "1/6": "Maybe I’ll watch it, too.",
+        "2/6": "Maybe I’ll try it, too.",
+        "3/6": "Maybe I’ll talk to him.",
+        "4/6": "Maybe I’ll grab something on the way.",
+        "5/6": "Maybe I’ll get a haircut tomorrow.",
+        "6/6": "Maybe I’ll eat sushi tonight."
+    };
+
+    const japaneseContentThenIll5 = {
+        "1/6": "そしたら着替えてくるね。",
+        "2/6": "そしたら傘持っていくね。",
+        "3/6": "そしたらもっと早く家出るわ。",
+        "4/6": "そしたら終わったら連絡する。",
+        "5/6": "そしたら仕事終わりに(彼女を)迎えに行くね。",
+        "6/6": "そしたら(彼を)一人にしておくわ。"
+    };
+
+    const englishContentThenIll5 = {
+        "1/6": "Then I’ll get dressed.",
+        "2/6": "Then I’ll get my umbrella.",
+        "3/6": "Then I’ll leave home earlier.",
+        "4/6": "Then I’ll be in touch when I’m done.",
+        "5/6": "Then I’ll pick her up after work.",
+        "6/6": "Then I’ll leave him alone."
+    };
+
+    const japaneseContentDidYouKnow5 = {
+        "1/6": "彼って英語話せるの知ってた？",
+        "2/6": "彼女結婚したの知ってた？",
+        "3/6": "新しいレストラン近くにできたの知ってた？",
+        "4/6": "Masaって19歳なの知ってた？",
+        "5/6": "彼が左利きなの知ってた？",
+        "6/6": "冬休み10日間だけなの知ってた？"
+    };
+
+    const englishContentDidYouKnow5 = {
+        "1/6": "Did you know he speaks English?",
+        "2/6": "Did you know she got married?",
+        "3/6": "Did you know a new restaurant opened nearby?",
+        "4/6": "Did you know Masa is 19 years old?",
+        "5/6": "Did you know he is left-handed?",
+        "6/6": "Did you know the winter break is only 10 days?"
+    };
+
+    const japaneseContentMaybeYouShould5 = {
+        "1/6": "タバコ吸うのやめた方がいいんじゃない？",
+        "2/6": "バイト辞めた方がいいんじゃない？",
+        "3/6": "もっと寝た方がいいんじゃない？",
+        "4/6": "休憩したほうがいいんじゃない？",
+        "5/6": "医者に診てもらった方がいいんじゃない？",
+        "6/6": "今日は仕事休んだ方がいいんじゃない？"
+    };
+
+    const englishContentMaybeYouShould5 = {
+        "1/6": "Maybe you should stop smoking.",
+        "2/6": "Maybe you should quit the part-time job.",
+        "3/6": "Maybe you should get more sleep.",
+        "4/6": "Maybe you should take a rest.",
+        "5/6": "Maybe you should see a doctor.",
+        "6/6": "Maybe you should take a day off work today."
+    };
+
+    const japaneseContentMaybeYouShouldnt5 = {
+        "1/6": "そんなにお金使わない方がいいと思うよ。",
+        "2/6": "それはしない方がいいよ。",
+        "3/6": "それ買わない方がいいよ。",
+        "4/6": "彼とは話さない方がいいよ。",
+        "5/6": "そんなお金、持ち歩かない方がいいよ。",
+        "6/6": "彼をあんまりからかわない方がいいよ。"
+    };
+
+    const englishContentMaybeYouShouldnt5 = {
+        "1/6": "Maybe you shouldn’t spend so much money.",
+        "2/6": "Maybe you shouldn’t do that.",
+        "3/6": "Maybe you shouldn’t buy it.",
+        "4/6": "Maybe you shouldn’t talk to him.",
+        "5/6": "Maybe you shouldn’t carry so much cash.",
+        "6/6": "Maybe you shouldn’t tease him so much."
+    };
+
+    const japaneseContentYouMightWanna5 = {
+        "1/6": "少し急いだほうがいいかも。",
+        "2/6": "これ試してみるといいかもよ。",
+        "3/6": "これ見ておいた方がいいかもよ。",
+        "4/6": "もう少し大きな声で話した方がいいかも。",
+        "5/6": "医者に診てもらった方がいいよ。",
+        "6/6": "彼とは距離を置いた方がいいかもね。"
+    };
+
+    const englishContentYouMightWanna5 = {
+        "1/6": "You might wanna hurry a little.",
+        "2/6": "You might wanna try this.",
+        "3/6": "You might wanna check this out.",
+        "4/6": "You might wanna speak a little louder.",
+        "5/6": "You might wanna see a doctor.",
+        "6/6": "You might wanna keep a distance from him."
+    };
+
+    var likeAudio = Array(6);
+    var wannaAudio = Array(6);
+    var wantedToAudio = Array(6);
+    var wantNounToAudio = Array(6);
+    var wantedNounToAudio = Array(6);
+    var dontWannaAudio = Array(6);
+    var dontWantYouToAudio = Array(6);
+    var youWannaAudio = Array(6);
+    var idLikeAudio = Array(6);
+    var idLikeToAudio = Array(6);
+    var wouldYouLikeAudio = Array(6);
+    var wouldYouLikeToAudio = Array(6);
+    var iNeedAudio = Array(6);
+    var iGottaAudio = Array(6);
+    var imGonnaHaveToAudio = Array(6);
+    var youDontHaveToAudio = Array(6);
+    var iHaveAudio = Array(6);
+    var iDontHaveAudio = Array(6);
+    var doYouHaveAudio = Array(6);
+    var youKnowAudio = Array(6);
+    var youcanAudio = Array(6);
+    var iCantYouCantAudio = Array(6);
+    var canYouCouldYouAudio = Array(6);
+    var couldYouTellMeAudio = Array(6);
+    var canICouldIAudio = Array(6);
+    var shouldIAudio = Array(6);
+    var maybeIllAudio = Array(6);
+    var thenIllAudio = Array(6);
+    var didYouKnowAudio = Array(6);
+    var maybeYouShouldAudio = Array(6);
+    var maybeYouShouldntAudio = Array(6);
+    var youMightWannaAudio = Array(6);
+
+    const englishContentJson = {
+        "1. I like to": englishContentLike5,
+        "2. I wanna": englishContentWanna5,
+        "3. I wanted to": englishContentWantedTo5,
+        "4. I want you to": englishContentWantNounTo5,
+        "5. I wanted you to": englishContentWantedNounTo5,
+        "6. I don't wanna": englishContentDontWanna5,
+        "7. I don't want you to": englishContentDontWantYouTo5,
+        "8. You wanna": englishContentYouWanna5,
+        "9. I'd like": englishContentIdLike5,
+        "10. I'd like to": englishContentIdLikeTo5,
+        "11. Would you like": englishContentWouldYouLike5,
+        "12. Would you like to": englishContentWouldYouLikeTo5,
+        "13. I need": englishContentINeed5,
+        "14. I gotta": englishContentIGotta5,
+        "15. I'm gonna have to": englishContentImGonnaHaveTo5,
+        "16. You don't have to": englishContentYouDontHaveTo5,
+        "17. I have": englishContentIHave5,
+        "18. I don't have": englishContentIDontHave5,
+        "19. Do you have": englishContentDoYouHave5,
+        "20. You know": englishContentYouKnow5,
+        "21. You can": englishContentYoucan5,
+        "22. I can't/You can't": englishContentICantYouCant5,
+        "23. Can you/Could you": englishContentCanYouCouldYou5,
+        "24. Could you tell me": englishContentCouldYouTellMe5,
+        "25. Can I/Could I": englishContentCanICouldI5,
+        "26. Should I": englishContentShouldI5,
+        "27. Maybe I'll": englishContentMaybeIll5,
+        "28. Then I'll": englishContentThenIll5,
+        "29. Did you know": englishContentDidYouKnow5,
+        "30. Maybe you should": englishContentMaybeYouShould5,
+        "31. Maybe you shouldn't": englishContentMaybeYouShouldnt5,
+        "32. You might wanna": englishContentYouMightWanna5,
+    };
+
+    const japaneseContentJson = {
+        "1. I like to": japaneseContentLike5,
+        "2. I wanna": japaneseContentWanna5,
+        "3. I wanted to": japaneseContentWantedTo5,
+        "4. I want you to": japaneseContentWantNounTo5,
+        "5. I wanted you to": japaneseContentWantedNounTo5,
+        "6. I don't wanna": japaneseContentDontWanna5,
+        "7. I don't want you to": japaneseContentDontWantYouTo5,
+        "8. You wanna": japaneseContentYouWanna5,
+        "9. I'd like": japaneseContentIdLike5,
+        "10. I'd like to": japaneseContentIdLikeTo5,
+        "11. Would you like": japaneseContentWouldYouLike5,
+        "12. Would you like to": japaneseContentWouldYouLikeTo5,
+        "13. I need": japaneseContentINeed5,
+        "14. I gotta": japaneseContentIGotta5,
+        "15. I'm gonna have to": japaneseContentImGonnaHaveTo5,
+        "16. You don't have to": japaneseContentYouDontHaveTo5,
+        "17. I have": japaneseContentIHave5,
+        "18. I don't have": japaneseContentIDontHave5,
+        "19. Do you have": japaneseContentDoYouHave5,
+        "20. You know": japaneseContentYouKnow5,
+        "21. You can": japaneseContentYoucan5,
+        "22. I can't/You can't": japaneseContentICantYouCant5,
+        "23. Can you/Could you": japaneseContentCanYouCouldYou5,
+        "24. Could you tell me": japaneseContentCouldYouTellMe5,
+        "25. Can I/Could I": japaneseContentCanICouldI5,
+        "26. Should I": japaneseContentShouldI5,
+        "27. Maybe I'll": japaneseContentMaybeIll5,
+        "28. Then I'll": japaneseContentThenIll5,
+        "29. Did you know": japaneseContentDidYouKnow5,
+        "30. Maybe you should": japaneseContentMaybeYouShould5,
+        "31. Maybe you shouldn't": japaneseContentMaybeYouShouldnt5,
+        "32. You might wanna": japaneseContentYouMightWanna5,
+    };
+
+    const audioJson = {
+        "1. I like to": likeAudio,
+        "2. I wanna": wannaAudio,
+        "3. I wanted to": wantedToAudio,
+        "4. I want you to": wantNounToAudio,
+        "5. I wanted you to": wantedNounToAudio,
+        "6. I don't wanna": dontWannaAudio,
+        "7. I don't want you to": dontWantYouToAudio,
+        "8. You wanna": youWannaAudio,
+        "9. I'd like": idLikeAudio,
+        "10. I'd like to": idLikeToAudio,
+        "11. Would you like": wouldYouLikeAudio,
+        "12. Would you like to": wouldYouLikeToAudio,
+        "13. I need": iNeedAudio,
+        "14. I gotta": iGottaAudio,
+        "15. I'm gonna have to": imGonnaHaveToAudio,
+        "16. You don't have to": youDontHaveToAudio,
+        "17. I have": iHaveAudio,
+        "18. I don't have": iDontHaveAudio,
+        "19. Do you have": doYouHaveAudio,
+        "20. You know": youKnowAudio,
+        "21. You can": youcanAudio,
+        "22. I can't/You can't": iCantYouCantAudio,
+        "23. Can you/Could you": canYouCouldYouAudio,
+        "24. Could you tell me": couldYouTellMeAudio,
+        "25. Can I/Could I": canICouldIAudio,
+        "26. Should I": shouldIAudio,
+        "27. Maybe I'll": maybeIllAudio,
+        "28. Then I'll": thenIllAudio,
+        "29. Did you know": didYouKnowAudio,
+        "30. Maybe you should": maybeYouShouldAudio,
+        "31. Maybe you shouldn't": maybeYouShouldntAudio,
+        "32. You might wanna": youMightWannaAudio,
+    };
+
+    for (let i = 0; i < 6; i++) {
+        likeAudio[i] = new Audio('audio/grade5/like/' + (i + 1) + '.m4a');
+        wannaAudio[i] = new Audio('audio/grade5/wanna/' + (i + 1) + '.m4a');
+        wantedToAudio[i] = new Audio('audio/grade5/wantedTo/' + (i + 1) + '.m4a');
+        wantNounToAudio[i] = new Audio('audio/grade5/wantNounTo/' + (i + 1) + '.m4a');
+        wantedNounToAudio[i] = new Audio('audio/grade5/wantedNounTo/' + (i + 1) + '.m4a');
+        dontWannaAudio[i] = new Audio('audio/grade5/dontWanna/' + (i + 1) + '.m4a');
+        dontWantYouToAudio[i] = new Audio('audio/grade5/dontWantYouTo/' + (i + 1) + '.m4a');
+        youWannaAudio[i] = new Audio('audio/grade5/youWanna/' + (i + 1) + '.m4a');
+        idLikeAudio[i] = new Audio('audio/grade5/idLike/' + (i + 1) + '.m4a');
+        idLikeToAudio[i] = new Audio('audio/grade5/idLikeTo/' + (i + 1) + '.m4a');
+        wouldYouLikeAudio[i] = new Audio('audio/grade5/wouldYouLike/' + (i + 1) + '.m4a');
+        wouldYouLikeToAudio[i] = new Audio('audio/grade5/wouldYouLikeTo/' + (i + 1) + '.m4a');
+        iNeedAudio[i] = new Audio('audio/grade5/iNeed/' + (i + 1) + '.m4a');
+        iGottaAudio[i] = new Audio('audio/grade5/iGotta/' + (i + 1) + '.m4a');
+        imGonnaHaveToAudio[i] = new Audio('audio/grade5/imGonnaHaveTo/' + (i + 1) + '.m4a');
+        youDontHaveToAudio[i] = new Audio('audio/grade5/youDontHaveTo/' + (i + 1) + '.m4a');
+        iHaveAudio[i] = new Audio('audio/grade5/iHave/' + (i + 1) + '.m4a');
+        iDontHaveAudio[i] = new Audio('audio/grade5/iDontHave/' + (i + 1) + '.m4a');
+        doYouHaveAudio[i] = new Audio('audio/grade5/doYouHave/' + (i + 1) + '.m4a');
+        youKnowAudio[i] = new Audio('audio/grade5/youKnow/' + (i + 1) + '.m4a');
+        youcanAudio[i] = new Audio('audio/grade5/youcan/' + (i + 1) + '.m4a');
+        iCantYouCantAudio[i] = new Audio('audio/grade5/iCantYouCant/' + (i + 1) + '.m4a');
+        canYouCouldYouAudio[i] = new Audio('audio/grade5/canYouCouldYou/' + (i + 1) + '.m4a');
+        couldYouTellMeAudio[i] = new Audio('audio/grade5/couldYouTellMe/' + (i + 1) + '.m4a');
+        canICouldIAudio[i] = new Audio('audio/grade5/canICouldI/' + (i + 1) + '.m4a');
+        shouldIAudio[i] = new Audio('audio/grade5/shouldI/' + (i + 1) + '.m4a');
+        maybeIllAudio[i] = new Audio('audio/grade5/maybeIll/' + (i + 1) + '.m4a');
+        thenIllAudio[i] = new Audio('audio/grade5/thenIll/' + (i + 1) + '.m4a');
+        didYouKnowAudio[i] = new Audio('audio/grade5/didYouKnow/' + (i + 1) + '.m4a');
+        maybeYouShouldAudio[i] = new Audio('audio/grade5/maybeYouShould/' + (i + 1) + '.m4a');
+        maybeYouShouldntAudio[i] = new Audio('audio/grade5/maybeYouShouldnt/' + (i + 1) + '.m4a');
+        youMightWannaAudio[i] = new Audio('audio/grade5/youMightWanna/' + (i + 1) + '.m4a');
+    }
+
+    let order = ["1/6", "2/6", "3/6", "4/6", "5/6", "6/6"];
+    let onceMore = [];
+
+    var englishContent = document.getElementById('english_content');
+    var middleContent = document.getElementById('middle_content');
+    var englishContent2 = document.getElementById('english_content2');
+    var englishContent3 = document.getElementById('english_content3');
+    var englishContent4 = document.getElementById('english_content4');
+    var englishContent5 = document.getElementById('english_content5');
+    var englishContent6 = document.getElementById('english_content6');
+    var englishContent1 = document.getElementById('english_content1');
+    var japaneseContent2 = document.getElementById('japanese_content2');
+    var japaneseContent3 = document.getElementById('japanese_content3');
+    var japaneseContent4 = document.getElementById('japanese_content4');
+    var japaneseContent5 = document.getElementById('japanese_content5');
+    var japaneseContent6 = document.getElementById('japanese_content6');
+    var japaneseContent1 = document.getElementById('japanese_content1');
+    var japaneseContent = document.getElementById('japanese_content');
+    var mainPage = document.getElementById('main_page');
+    var secondPage = document.getElementById('second_page');
+    var firstPage = document.getElementById('first_page');
+    var buttonText = document.getElementById('button-text');
+    var pageOrder = document.getElementById('page_order');
+    var counter = document.getElementById('counter');
+    let isMouseDown = false;
+    let startX, endX;
+
+    var answerAudio = new Audio('audio/answer.mp3');
+    var currentOrder = "1. I like to";
+
+    for (let i = 0; i < titleArray.length; i++) {
+        let div = document.createElement("div");
+        div.className = "select-item";
+        div.onclick = function () {
+            goPractice(titleArray[i]);
+        };
+
+        let img = document.createElement("img");
+        img.src = "img/folder.png";
+        img.style.width = "60px";
+        img.style.height = "70px";
+
+        let p = document.createElement("p");
+        p.style.color = "black";
+        p.style.fontSize = "18px";
+        p.style.fontWeight = "600";
+        p.style.margin = "0px";
+        p.textContent = titleArray[i].substring(3);
+
+        div.appendChild(img);
+        div.appendChild(p);
+        mainPage.appendChild(div);
+    }
+
+    function goPractice(str) {
+        firstPage.style.display = 'none';
+        secondPage.style.display = 'block';
+        currentOrder = str;
+        pageOrder.textContent = str;
+        englishContent1.textContent = englishContentJson[str]['1/6'];
+        englishContent2.textContent = englishContentJson[str]['2/6'];
+        englishContent3.textContent = englishContentJson[str]['3/6'];
+        englishContent4.textContent = englishContentJson[str]['4/6'];
+        englishContent5.textContent = englishContentJson[str]['5/6'];
+        englishContent6.textContent = englishContentJson[str]['6/6'];
+    }
+
+    function goFirstPage() {
+        firstPage.style.display = 'block';
+        secondPage.style.display = 'none';
+        clearInterval(intervalId);
+    }
+
+    function goEnglishContent() {
+        englishContent.style.display = 'block';
+        japaneseContent.style.display = 'none';
+        englishContent1.textContent = englishContentJson[currentOrder]['1/6'];
+        englishContent2.textContent = englishContentJson[currentOrder]['2/6'];
+        englishContent3.textContent = englishContentJson[currentOrder]['3/6'];
+        englishContent4.textContent = englishContentJson[currentOrder]['4/6'];
+        englishContent5.textContent = englishContentJson[currentOrder]['5/6'];
+        englishContent6.textContent = englishContentJson[currentOrder]['6/6'];
+    }
+
+    function goJapaneseContent() {
+        englishContent.style.display = 'none';
+        japaneseContent.style.display = 'block';
+        japaneseContent1.textContent = japaneseContentJson[currentOrder]['1/6'];
+        japaneseContent2.textContent = japaneseContentJson[currentOrder]['2/6'];
+        japaneseContent3.textContent = japaneseContentJson[currentOrder]['3/6'];
+        japaneseContent4.textContent = japaneseContentJson[currentOrder]['4/6'];
+        japaneseContent5.textContent = japaneseContentJson[currentOrder]['5/6'];
+        japaneseContent6.textContent = japaneseContentJson[currentOrder]['6/6'];
+    }
+
+    let count = 30;
+    let intervalId;
+
+    function clickButton() {
+        if (buttonText.textContent == 'START') {
+            buttonText.textContent = '次に進む';
+            counter.style.color = 'black';
+            clearInterval(intervalId);
+            intervalId = setInterval(() => {
+                if (count > 0) {
+                    count--;
+                    counter.textContent = count;
+                }
+                else {
+                    clearInterval(intervalId);
+                    counter.textContent = 30;
+                    count = 30;
+                    buttonText.textContent = '答え合わせ';
+                    englishContent.style.display = 'none';
+                    japaneseContent.style.display = 'none';
+                    middleContent.style.display = 'block';
+                    intervalId = setInterval(() => {
+                        if (count > 0) {
+                            count--;
+                            counter.textContent = count;
+                        }
+                        else {
+                            counter.textContent = 30;
+                            buttonText.textContent = '問題を終了する';
+                            clearInterval(intervalId);
+                            englishContent.style.display = 'block';
+                            japaneseContent.style.display = 'none';
+                            counter.style.color = 'transparent';
+                            middleContent.style.display = 'none';
+                        }
+                    }, 1000);
+                }
+            }, 1000);
+        }
+        else {
+            if (buttonText.textContent == '次に進む') {
+                counter.textContent = 30;
+                count = 30;
+                clearInterval(intervalId);
+                buttonText.textContent = '答え合わせ';
+                englishContent.style.display = 'none';
+                japaneseContent.style.display = 'none';
+                middleContent.style.display = 'block';
+                counter.style.color = 'black';
+                intervalId = setInterval(() => {
+                    if (count > 0) {
+                        count--;
+                        counter.textContent = count;
+                    }
+                    else {
+                        counter.textContent = 30;
+                        buttonText.textContent = '問題を終了する';
+                        clearInterval(intervalId);
+                        englishContent.style.display = 'block';
+                        japaneseContent.style.display = 'none';
+                        counter.style.color = 'transparent';
+                        middleContent.style.display = 'none';
+                    }
+                }, 1000);
+            }
+            else {
+                if (buttonText.textContent == '答え合わせ') {
+                    buttonText.textContent = '問題を終了する';
+                    englishContent.style.display = 'block';
+                    middleContent.style.display = 'none';
+                    japaneseContent.style.display = 'none';
+                    counter.style.color = 'transparent';
+                }
+                else {
+
+                }
+            }
+        }
+    }
+
+    var audioVar;
+
+    function audioPlay(order) {
+        audioVar = audioJson[currentOrder][order - 1];
+        audioVar.volume = 0.3;
+        audioVar.play();
+        audioVar.loop = false;
+    }
+
+</script>
+
+</html>
