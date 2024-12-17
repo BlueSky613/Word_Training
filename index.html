@@ -259,7 +259,7 @@
             </div>
         </div>
         <div style="display: flex; margin-top: 10px; padding: 10px; justify-content: space-between;">
-            <p style="margin: 0px; color: transparent;" id="counter">30</p>
+            <p style="margin: 0px; color: transparent;" id="counter">60</p>
             <div class="button" onclick="clickButton()">
                 <p style="margin: 0px; font-weight: 700;" id="button-text">START</p>
             </div>
@@ -1086,6 +1086,10 @@
     }
 
     function goFirstPage() {
+        counter.style.color = 'transparent';
+        counter.textContent = 60;
+        count = 60;
+        output = 30
         firstPage.style.display = 'block';
         buttonText.textContent = 'START';
         secondPage.style.display = 'none';
@@ -1117,7 +1121,8 @@
         japaneseContent6.textContent = japaneseContentJson[currentOrder]['6/6'];
     }
 
-    let count = 30;
+    let count = 60;
+    let output = 30;
     let intervalId;
 
     function clickButton() {
@@ -1133,18 +1138,17 @@
                 else {
                     clearInterval(intervalId);
                     counter.textContent = 30;
-                    count = 30;
+                    output = 30;
                     buttonText.textContent = '答え合わせ';
                     englishContent.style.display = 'none';
                     japaneseContent.style.display = 'none';
                     middleContent.style.display = 'block';
                     intervalId = setInterval(() => {
-                        if (count > 0) {
-                            count--;
-                            counter.textContent = count;
+                        if (output > 0) {
+                            output--;
+                            counter.textContent = output;
                         }
                         else {
-                            counter.textContent = 30;
                             buttonText.textContent = '次の問題に行く';
                             clearInterval(intervalId);
                             englishContent.style.display = 'block';
@@ -1159,7 +1163,7 @@
         else {
             if (buttonText.textContent == '次に進む') {
                 counter.textContent = 30;
-                count = 30;
+                output = 30;
                 clearInterval(intervalId);
                 buttonText.textContent = '答え合わせ';
                 englishContent.style.display = 'none';
@@ -1167,12 +1171,11 @@
                 middleContent.style.display = 'block';
                 counter.style.color = 'black';
                 intervalId = setInterval(() => {
-                    if (count > 0) {
-                        count--;
-                        counter.textContent = count;
+                    if (output > 0) {
+                        output--;
+                        counter.textContent = output;
                     }
                     else {
-                        counter.textContent = 30;
                         buttonText.textContent = '次の問題に行く';
                         clearInterval(intervalId);
                         englishContent.style.display = 'block';
@@ -1192,8 +1195,15 @@
                 }
                 else {
                     buttonText.textContent = 'START';
-                    if(titleArray.indexOf(currentOrder) < 31) {goPractice(titleArray[titleArray.indexOf(currentOrder) + 1])}
-                    else {goFirstPage()}
+                    clearInterval(intervalId);
+                    counter.style.color = 'transparent';
+                    if (titleArray.indexOf(currentOrder) < 31) {
+                        goPractice(titleArray[titleArray.indexOf(currentOrder) + 1]);
+                        counter.textContent = 60;
+                        count = 60;
+                        output = 30;
+                    }
+                    else { goFirstPage() }
                 }
             }
         }
