@@ -45,6 +45,7 @@
             display: flex;
             justify-content: left;
             align-items: center;
+            cursor: pointer;
         }
 
         .content-item {
@@ -60,6 +61,7 @@
         .icon {
             width: 40px;
             height: 40px;
+            cursor: pointer;
         }
 
         .content-text {
@@ -292,7 +294,7 @@
             </p>
             <img src="img/menu.png" class="icon" onclick="goFirst()">
         </div>
-        <div style="display: flex; align-items: center; flex-direction: column;">
+        <div style="display: flex; align-items: center; flex-direction: column; ">
             <div class="select-item" onclick="goGrade(5)">
                 <img src="img/folder.png" style="width: 60px; height: 70px;">
                 <p style="color: black; font-size: 22px; font-weight: 600; margin: 0px;">Masa検5級</p>
@@ -316,17 +318,18 @@
             <div style="margin-top: 30px;"></div>
         </div>
     </div>
-    <div class="first-screen" style="display: block;" id="first_page">
+    <div class="first-screen" style="display: none;" id="first_page">
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <p style="color: #05a5a9; font-size: 36px; font-weight: 700; margin: 0px;margin-left: 10px;" id="grade">
                 Masa検5級
             </p>
+            <img src="img/menu.png" class="icon" onclick="goFirst()">
         </div>
         <div style="display: flex; align-items: center; flex-direction: column;" id="main_page">
         </div>
     </div>
     <div class="first-screen" style="display: none;" id="second_page">
-        <div style="display: flex; justify-content: space-between; align-items: center; background-color: #f37e30;border-radius: 12px;"
+        <div style="display: flex; justify-content: space-between; align-items: center; background-color: #f37e30;border-radius: 12px; cursor: pointer;"
             onclick="goFirstPage()">
             <img src="img/left.png" class="icon">
             <p style="color: white; font-size: 20px; font-weight: 700; margin: 10px;">
@@ -4320,55 +4323,59 @@
     var counter = document.getElementById('counter');
     var gradeText = document.getElementById('grade');
     let isMouseDown = false;
-    let grade = 5;
     let startX, endX;
 
     var answerAudio = new Audio('audio/answer.mp3');
     var currentOrder = "1. I like to";
-
-    for (let i = 0; i < titleArray[grade - 1].length; i++) {
-        let div = document.createElement("div");
-        div.className = "select-item";
-        div.onclick = function () {
-            goPractice(titleArray[grade - 1][i]);
-        };
-
-        let img = document.createElement("img");
-        img.src = "img/folder.png";
-        img.style.width = "60px";
-        img.style.height = "70px";
-
-        let p = document.createElement("p");
-        p.style.color = "black";
-        p.style.fontSize = "18px";
-        p.style.fontWeight = "600";
-        p.style.margin = "0px";
-        p.textContent = titleArray[grade - 1][i].substring(3);
-
-        div.appendChild(img);
-        div.appendChild(p);
-        mainPage.appendChild(div);
-    }
 
     function goPractice(str) {
         firstPage.style.display = 'none';
         secondPage.style.display = 'block';
         currentOrder = str;
         pageOrder.textContent = str;
-        englishContent1.textContent = englishContentJson[str]['1/6'];
-        englishContent2.textContent = englishContentJson[str]['2/6'];
-        englishContent3.textContent = englishContentJson[str]['3/6'];
-        englishContent4.textContent = englishContentJson[str]['4/6'];
-        englishContent5.textContent = englishContentJson[str]['5/6'];
-        englishContent6.textContent = englishContentJson[str]['6/6'];
+        englishContent1.textContent = englishContentJson[grade - 1][str]['1/6'];
+        englishContent2.textContent = englishContentJson[grade - 1][str]['2/6'];
+        englishContent3.textContent = englishContentJson[grade - 1][str]['3/6'];
+        englishContent4.textContent = englishContentJson[grade - 1][str]['4/6'];
+        englishContent5.textContent = englishContentJson[grade - 1][str]['5/6'];
+        englishContent6.textContent = englishContentJson[grade - 1][str]['6/6'];
     }
 
     function goGrade(index) {
         indexPage.style.display = 'none';
         secondPage.style.display = 'none';
         firstPage.style.display = 'block';
-        grade = index
+        grade = index;
         gradeText.textContent = 'Masa検' + grade + '級';
+        var mainPageLength = mainPage.children.length
+        if (mainPageLength != 1) {
+            for (let i = 0; i < mainPageLength; i++) {
+                mainPage.removeChild(mainPage.childNodes[1]);
+            }
+        }
+        for (let i = 0; i < titleArray[grade - 1].length; i++) {
+            let div = document.createElement("div");
+            div.className = "select-item";
+            div.onclick = function () {
+                goPractice(titleArray[grade - 1][i]);
+            };
+
+            let img = document.createElement("img");
+            img.src = "img/folder.png";
+            img.style.width = "60px";
+            img.style.height = "70px";
+
+            let p = document.createElement("p");
+            p.style.color = "black";
+            p.style.fontSize = "18px";
+            p.style.fontWeight = "600";
+            p.style.margin = "0px";
+            p.textContent = titleArray[grade - 1][i].substring(3);
+
+            div.appendChild(img);
+            div.appendChild(p);
+            mainPage.appendChild(div);
+        }
     }
 
     function goFirst() {
@@ -4489,7 +4496,7 @@
                     buttonText.textContent = 'START';
                     clearInterval(intervalId);
                     counter.style.color = 'transparent';
-                    if (titleArray[grade - 1].indexOf(currentOrder) < 31) {
+                    if (titleArray[grade - 1].indexOf(currentOrder) < titleArray[grade - 1].length - 1) {
                         goPractice(titleArray[grade - 1][titleArray[grade - 1].indexOf(currentOrder) + 1]);
                         counter.textContent = 60;
                         count = 60;
