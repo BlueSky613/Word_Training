@@ -1021,9 +1021,6 @@
         youMightWannaAudio[i] = new Audio('audio/grade5/youMightWanna/' + (i + 1) + '.m4a');
     }
 
-    let order = ["1/6", "2/6", "3/6", "4/6", "5/6", "6/6"];
-    let onceMore = [];
-
     var englishContent = document.getElementById('english_content');
     var middleContent = document.getElementById('middle_content');
     var englishContent2 = document.getElementById('english_content2');
@@ -1090,7 +1087,11 @@
 
     function goFirstPage() {
         firstPage.style.display = 'block';
+        buttonText.textContent = 'START';
         secondPage.style.display = 'none';
+        middleContent.style.display = 'none';
+        englishContent.style.display = 'block';
+        japaneseContent.style.display = 'none';
         clearInterval(intervalId);
     }
 
@@ -1144,7 +1145,7 @@
                         }
                         else {
                             counter.textContent = 30;
-                            buttonText.textContent = '問題を終了する';
+                            buttonText.textContent = '次の問題に行く';
                             clearInterval(intervalId);
                             englishContent.style.display = 'block';
                             japaneseContent.style.display = 'none';
@@ -1172,7 +1173,7 @@
                     }
                     else {
                         counter.textContent = 30;
-                        buttonText.textContent = '問題を終了する';
+                        buttonText.textContent = '次の問題に行く';
                         clearInterval(intervalId);
                         englishContent.style.display = 'block';
                         japaneseContent.style.display = 'none';
@@ -1183,14 +1184,16 @@
             }
             else {
                 if (buttonText.textContent == '答え合わせ') {
-                    buttonText.textContent = '問題を終了する';
+                    buttonText.textContent = '次の問題に行く';
                     englishContent.style.display = 'block';
                     middleContent.style.display = 'none';
                     japaneseContent.style.display = 'none';
                     counter.style.color = 'transparent';
                 }
                 else {
-
+                    buttonText.textContent = 'START';
+                    if(titleArray.indexOf(currentOrder) < 31) {goPractice(titleArray[titleArray.indexOf(currentOrder) + 1])}
+                    else {goFirstPage()}
                 }
             }
         }
