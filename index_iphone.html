@@ -67,7 +67,7 @@
 
         .content-text {
             color: black;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             margin: 0px;
             text-align: start;
@@ -343,7 +343,7 @@
                 <div
                     style="display: flex; justify-content: start; align-items: start; margin-top: 0px; flex-direction: column;">
                     <div style="display: flex; flex-direction: column;">
-                        <div style="display: flex; justify-content: start;">
+                        <div style="display: flex; justify-content: start;margin: 10px 0px;">
                             <p class="content-text">
                                 ①</p>
                             <p class="content-text" id="english_content1">
@@ -351,11 +351,11 @@
                         </div>
                         <div style="left: 10px;">
                             <audio controls="True" id="audioBtn1" src="audio/grade5/like/1.m4a"
-                                style="width: 180px; height: 20px;display: none;margin: 15px 0px;"></audio>
+                                style="width: 180px; height: 20px;display: none;"></audio>
                         </div>
                     </div>
                     <div style="display: flex; flex-direction: column;">
-                        <div style="display: flex; justify-content: start;">
+                        <div style="display: flex; justify-content: start;margin: 10px 0px;">
                             <p class="content-text">
                                 ②</p>
                             <p class="content-text" id="english_content2" onclick="audioPlay(2)">
@@ -363,11 +363,11 @@
                         </div>
                         <div style="left: 10px;">
                             <audio controls="True" id="audioBtn2" src="audio/grade5/like/1.m4a"
-                                style="width: 180px; height: 20px;display: none;margin: 15px 0px;"></audio>
+                                style="width: 180px; height: 20px;display: none;"></audio>
                         </div>
                     </div>
                     <div style="display: flex; flex-direction: column;">
-                        <div style="display: flex; justify-content: start;">
+                        <div style="display: flex; justify-content: start;margin: 10px 0px;">
                             <p class="content-text">
                                 ③</p>
                             <p class="content-text" id="english_content3" onclick="audioPlay(3)">
@@ -375,11 +375,11 @@
                         </div>
                         <div style="left: 10px;">
                             <audio controls="True" id="audioBtn3" src="audio/grade5/like/1.m4a"
-                                style="width: 180px; height: 20px;display: none;margin: 15px 0px;"></audio>
+                                style="width: 180px; height: 20px;display: none;"></audio>
                         </div>
                     </div>
                     <div style="display: flex; flex-direction: column;">
-                        <div style="display: flex; justify-content: start;">
+                        <div style="display: flex; justify-content: start;margin: 10px 0px;">
                             <p class="content-text">
                                 ④</p>
                             <p class="content-text" id="english_content4" onclick="audioPlay(4)">
@@ -387,11 +387,11 @@
                         </div>
                         <div style="left: 10px;">
                             <audio controls="True" id="audioBtn4" src="audio/grade5/like/1.m4a"
-                                style="width: 180px; height: 20px;display: none;margin: 15px 0px;"></audio>
+                                style="width: 180px; height: 20px;display: none;"></audio>
                         </div>
                     </div>
                     <div style="display: flex; flex-direction: column;">
-                        <div style="display: flex; justify-content: start;">
+                        <div style="display: flex; justify-content: start;margin: 10px 0px;">
                             <p class="content-text">
                                 ⑤</p>
                             <p class="content-text" id="english_content5" onclick="audioPlay(5)">
@@ -399,11 +399,11 @@
                         </div>
                         <div style="left: 10px;">
                             <audio controls="True" id="audioBtn5" src="audio/grade5/like/1.m4a"
-                                style="width: 180px; height: 20px;display: none;margin: 15px 0px;"></audio>
+                                style="width: 180px; height: 20px;display: none;"></audio>
                         </div>
                     </div>
                     <div style="display: flex; flex-direction: column;">
-                        <div style="display: flex; justify-content: start;">
+                        <div style="display: flex; justify-content: start;margin: 10px 0px;">
                             <p class="content-text">
                                 ⑥</p>
                             <p class="content-text" id="english_content6" onclick="audioPlay(6)">
@@ -411,7 +411,7 @@
                         </div>
                         <div style="left: 10px;">
                             <audio controls="True" id="audioBtn6" src="audio/grade5/like/1.m4a"
-                                style="width: 180px; height: 20px;display: none;margin: 15px 0px;"></audio>
+                                style="width: 180px; height: 20px;display: none;"></audio>
                         </div>
                     </div>
                 </div>
@@ -4438,6 +4438,13 @@
     }
 
     function goFirstPage() {
+        audioBtn1.style.display = 'none';
+        audioBtn2.style.display = 'none';
+        audioBtn3.style.display = 'none';
+        audioBtn4.style.display = 'none';
+        audioBtn5.style.display = 'none';
+        audioBtn6.style.display = 'none';
+        document.getElementById('audio_button').textContent = '音声を表示する';
         counter.style.color = 'transparent';
         counter.textContent = 60;
         count = 60;
