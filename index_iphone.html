@@ -67,7 +67,7 @@
 
         .content-text {
             color: black;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             margin: 0px;
             text-align: start;
@@ -351,7 +351,7 @@
                         </div>
                         <div style="left: 10px;">
                             <audio controls="True" id="audioBtn1" src="audio/grade5/like/1.m4a"
-                                style="width: 250px; height: 30px;"></audio>
+                                style="width: 250px; height: 30px;display: none;margin: 5px 0px;"></audio>
                         </div>
                     </div>
                     <div style="display: flex; flex-direction: column;">
@@ -363,7 +363,7 @@
                         </div>
                         <div style="left: 10px;">
                             <audio controls="True" id="audioBtn2" src="audio/grade5/like/1.m4a"
-                                style="width: 250px; height: 30px;"></audio>
+                                style="width: 250px; height: 30px;display: none;margin: 5px 0px;"></audio>
                         </div>
                     </div>
                     <div style="display: flex; flex-direction: column;">
@@ -375,7 +375,7 @@
                         </div>
                         <div style="left: 10px;">
                             <audio controls="True" id="audioBtn3" src="audio/grade5/like/1.m4a"
-                                style="width: 250px; height: 30px;"></audio>
+                                style="width: 250px; height: 30px;display: none;margin: 5px 0px;"></audio>
                         </div>
                     </div>
                     <div style="display: flex; flex-direction: column;">
@@ -387,7 +387,7 @@
                         </div>
                         <div style="left: 10px;">
                             <audio controls="True" id="audioBtn4" src="audio/grade5/like/1.m4a"
-                                style="width: 250px; height: 30px;"></audio>
+                                style="width: 250px; height: 30px;display: none;margin: 5px 0px;"></audio>
                         </div>
                     </div>
                     <div style="display: flex; flex-direction: column;">
@@ -399,7 +399,7 @@
                         </div>
                         <div style="left: 10px;">
                             <audio controls="True" id="audioBtn5" src="audio/grade5/like/1.m4a"
-                                style="width: 250px; height: 30px;"></audio>
+                                style="width: 250px; height: 30px;display: none;margin: 5px 0px;"></audio>
                         </div>
                     </div>
                     <div style="display: flex; flex-direction: column;">
@@ -411,15 +411,19 @@
                         </div>
                         <div style="left: 10px;">
                             <audio controls="True" id="audioBtn6" src="audio/grade5/like/1.m4a"
-                                style="width: 250px; height: 30px;"></audio>
+                                style="width: 250px; height: 30px;display: none;margin: 5px 0px;"></audio>
                         </div>
                     </div>
-
                 </div>
-                <div style="display: flex; justify-content: end; margin-top: 20px;cursor: pointer;"
-                    onclick="goJapaneseContent()">
-                    <p class="switch-button">
-                        日本語を見る</p>
+                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <div style="cursor: pointer;" onclick="showAudio()">
+                        <p class="switch-button" id="audio_button">
+                            音声を表示する</p>
+                    </div>
+                    <div style="cursor: pointer;" onclick="goJapaneseContent()">
+                        <p class="switch-button">
+                            日本語を見る</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -4459,6 +4463,13 @@
     }
 
     function goJapaneseContent() {
+        audioBtn1.style.display = 'none';
+        audioBtn2.style.display = 'none';
+        audioBtn3.style.display = 'none';
+        audioBtn4.style.display = 'none';
+        audioBtn5.style.display = 'none';
+        audioBtn6.style.display = 'none';
+        document.getElementById('audio_button').textContent = '音声を表示する';
         englishContent.style.display = 'none';
         japaneseContent.style.display = 'block';
         japaneseContent1.textContent = japaneseContentJson[grade - 1][currentOrder]['1/6'];
@@ -4473,8 +4484,36 @@
     let output = 30;
     let intervalId;
 
+    function showAudio() {
+        if (audioBtn1.style.display == 'none') {
+            audioBtn1.style.display = 'block';
+            audioBtn2.style.display = 'block';
+            audioBtn3.style.display = 'block';
+            audioBtn4.style.display = 'block';
+            audioBtn5.style.display = 'block';
+            audioBtn6.style.display = 'block';
+            document.getElementById('audio_button').textContent = '音声を隠す';
+        }
+        else {
+            audioBtn1.style.display = 'none';
+            audioBtn2.style.display = 'none';
+            audioBtn3.style.display = 'none';
+            audioBtn4.style.display = 'none';
+            audioBtn5.style.display = 'none';
+            audioBtn6.style.display = 'none';
+            document.getElementById('audio_button').textContent = '音声を表示する';
+        }
+    }
+
     function clickButton() {
         if (buttonText.textContent == 'START') {
+            audioBtn1.style.display = 'none';
+            audioBtn2.style.display = 'none';
+            audioBtn3.style.display = 'none';
+            audioBtn4.style.display = 'none';
+            audioBtn5.style.display = 'none';
+            audioBtn6.style.display = 'none';
+            document.getElementById('audio_button').textContent = '音声を表示する';
             buttonText.textContent = '次に進む';
             counter.style.color = 'black';
             clearInterval(intervalId);
@@ -4535,6 +4574,13 @@
             }
             else {
                 if (buttonText.textContent == '答え合わせ') {
+                    audioBtn1.style.display = 'none';
+                    audioBtn2.style.display = 'none';
+                    audioBtn3.style.display = 'none';
+                    audioBtn4.style.display = 'none';
+                    audioBtn5.style.display = 'none';
+                    audioBtn6.style.display = 'none';
+                    document.getElementById('audio_button').textContent = '音声を表示する';
                     buttonText.textContent = '次の問題に行く';
                     englishContent.style.display = 'block';
                     middleContent.style.display = 'none';
